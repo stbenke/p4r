@@ -8,23 +8,25 @@ You will need an R installation with the reticulate package installed and a Pyth
 
 The following worked under Win10:
 
-  # updated to newest conda: 
-  conda update conda  
-  # created env very explicitly via: 
-  conda create -n p4r python=3.9 numpy=1.22.3  
+```
+# updated to newest conda: 
+conda update conda
 
-  # packages for pacmap:  
-  conda install -c anaconda scikit-learn  
-  conda install -c conda-forge python-annoy  
-  conda install numba  
-  pip install pacmap  
+# created env very explicitly via:
+conda create -n p4r python=3.9 numpy=1.22.3  
 
-  # packages for parc:  
-  conda install -c conda-forge python-igraph
-  conda install -c conda-forge leidenalg
-  conda install -c conda-forge hnswlib
-  pip install parc
+# packages for pacmap:  
+conda install -c anaconda scikit-learn  
+conda install -c conda-forge python-annoy  
+conda install numba  
+pip install pacmap  
 
+# packages for parc:  
+conda install -c conda-forge python-igraph
+conda install -c conda-forge leidenalg
+conda install -c conda-forge hnswlib
+pip install parc
+```
 ## Run the functions
 
 Clone the repository and look at the pacmap.Rmd and parc.Rmd files. You will need to have the f_pacmap.py and f_parc.py files in the same directory.

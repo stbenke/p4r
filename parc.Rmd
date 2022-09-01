@@ -1,0 +1,72 @@
+---
+title: "parc"
+output: html_document
+date: '2022-07-07'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(reticulate)
+```
+
+## PARC
+
+"PARC, “phenotyping by accelerated refined community-partitioning” - is a fast, automated, combinatorial graph-based clustering approach that integrates hierarchical graph construction (HNSW) and data-driven graph-pruning with the new Leiden community-detection algorithm."
+
+### Original code and publication
+
+- https://github.com/ShobiStassen/PARC  
+- https://academic.oup.com/bioinformatics/article/36/9/2778/5714737  
+
+### Parameters
+
+From the original documentation:
+
+data
+(numpy.ndarray) num samples x num features
+
+true_label
+(numpy.ndarray) (optional)
+
+dist_std_local
+(optional, default = 2) local pruning threshold: the higher the parameter, the more edges are retained
+
+jac_std_global
+(optional, default = ‘median’) global level graph pruning. This threshold can also be set as the number of standard deviations below the network’s mean-jaccard-weighted edges. 0.1-1 provide reasonable pruning. higher value means less pruning. e.g. a value of 0.15 means all edges that are above mean(edgeweight)-0.15*std(edge-weights) are retained. We find both 0.15 and ‘median’ to yield good results resulting in pruning away ~ 50-60% edges
+
+random_seed
+(optional, default = 42) The random seed to pass to Leiden
+
+resolution_parameter
+(optional, default = 1) Uses ModuliartyVP and RBConfigurationVertexPartition
+
+jac_weighted_edges
+(optional, default = True) Uses Jaccard weighted pruned graph as input to community detection. For very large datasets set this to False to observe a speed-up with little impact on accuracy
+
+### Notes
+
+- The input data must be passed as matrix  
+
+- All parameters passed as integers (e.g., for dist_std_local) must be passed with an L (e.g., 2L)
+
+### Example
+
+```{r}
+use_condaenv("p4r")
+
+source_python("f_parc.py")
+
+source_python("f_pacmap.py")
+
+dimred <- pacmap_fit(as.matrix(iris[,-5]), random_state = 12L)
+
+clust <- unlist(parc_clust(as.matrix(iris[,-5])))
+
+plot(dimred, col = clust+1)
+```
+
+
+

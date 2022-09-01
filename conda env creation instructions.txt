@@ -1,0 +1,20 @@
+reticulate can fail to recognize numpy installations correctly
+
+what got it to work in the end:
+
+- updated to newest conda
+conda update conda
+- created env very explicitly via:
+conda create -n p4r python=3.9 numpy=1.22.3
+
+- packages for pacmap:
+conda install -c anaconda scikit-learn
+conda install -c conda-forge python-annoy
+conda install numba
+pip install pacmap
+
+- packages for parc:
+conda install -c conda-forge python-igraph
+conda install -c conda-forge leidenalg
+conda install -c conda-forge hnswlib
+pip install parc
